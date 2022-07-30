@@ -1,6 +1,8 @@
 package com.andersonfagundes.mylibrary.domain;
 
 import lombok.*;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -38,8 +38,8 @@ public class AuthorService {
     public void replace(AuthorPutRequestBody authorPutRequestBody) {
         Author savedAuthor = findByIdOrThrowBadRequestException(authorPutRequestBody.getId());
         Author author = Author.builder()
-                .id(savedAuthor.getId()) //so para ter certeza que o id que esta vindo e o que esta no bd, e todo o resto do objeto sera atualizado
-                .name(authorPutRequestBody.getName())
+                .id(savedAuthor.getId()) //savedAuthor.getId() é o id que esta vindo do bd
+                .name(authorPutRequestBody.getName()) //resto do objeto que será atualizado
                 .build();
 
         authorRepository.save(author);

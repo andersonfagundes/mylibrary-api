@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<Author> save(@RequestBody AuthorPostRequestBody authorPostRequestBody){ //utilizar o jackson para fazer o mapeamento para a classe Author
+    public ResponseEntity<Author> save(@RequestBody @Valid AuthorPostRequestBody authorPostRequestBody) { //utilizar o jackson para fazer o mapeamento para a classe Author
         return new ResponseEntity<>(authorService.save(authorPostRequestBody), HttpStatus.CREATED);
     }
 
@@ -46,7 +47,7 @@ public class AuthorController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody AuthorPutRequestBody authorPutRequestBody){
+    public ResponseEntity<Void> replace(@RequestBody @Valid AuthorPutRequestBody authorPutRequestBody){
         authorService.replace(authorPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

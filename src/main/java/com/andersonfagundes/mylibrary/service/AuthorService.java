@@ -1,6 +1,7 @@
 package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.Author;
+import com.andersonfagundes.mylibrary.mapper.author.AuthorMapper;
 import com.andersonfagundes.mylibrary.repository.AuthorRepository;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPostRequestBody;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
@@ -27,8 +28,7 @@ public class AuthorService {
     }
 
     public Author save(AuthorPostRequestBody authorPostRequestBody) {
-        Author author = Author.builder().name(authorPostRequestBody.getName()).build();
-        return authorRepository.save(author); //salva essa referencia (objeto) e retorna ela atualizada com id
+        return authorRepository.save(AuthorMapper.INSTANCE.toAuthor(authorPostRequestBody));
     }
 
     public void delete(long id) {
@@ -37,11 +37,8 @@ public class AuthorService {
 
     public void replace(AuthorPutRequestBody authorPutRequestBody) {
         Author savedAuthor = findByIdOrThrowBadRequestException(authorPutRequestBody.getId());
-        Author author = Author.builder()
-                .id(savedAuthor.getId()) //savedAuthor.getId() é o id que esta vindo do bd
-                .name(authorPutRequestBody.getName()) //resto do objeto que será atualizado
-                .build();
-
+        Author author = AuthorMapper.INSTANCE.toAuthor(authorPutRequestBody);
+        author.setId(savedAuthor.getId());
         authorRepository.save(author);
     }
 }

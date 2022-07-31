@@ -1,6 +1,7 @@
 package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.Author;
+import com.andersonfagundes.mylibrary.exception.author.BadRequestException;
 import com.andersonfagundes.mylibrary.mapper.author.AuthorMapper;
 import com.andersonfagundes.mylibrary.repository.AuthorRepository;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPostRequestBody;
@@ -28,7 +29,8 @@ public class AuthorService {
 
     public Author findByIdOrThrowBadRequestException(long id) {
         return authorRepository.findById(id) //findById retorna um optional
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Author not found"));
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Author not found"));
+                .orElseThrow(() -> new BadRequestException("Author not found"));
     }
 
     public Author save(AuthorPostRequestBody authorPostRequestBody) {

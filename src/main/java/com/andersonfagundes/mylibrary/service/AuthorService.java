@@ -1,15 +1,13 @@
 package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.Author;
-import com.andersonfagundes.mylibrary.exception.author.BadRequestException;
+import com.andersonfagundes.mylibrary.exception.BadRequestException;
 import com.andersonfagundes.mylibrary.mapper.author.AuthorMapper;
 import com.andersonfagundes.mylibrary.repository.AuthorRepository;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPostRequestBody;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

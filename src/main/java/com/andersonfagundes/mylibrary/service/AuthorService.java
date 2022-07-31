@@ -9,6 +9,7 @@ import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class AuthorService {
                 .orElseThrow(() -> new BadRequestException("Author not found"));
     }
 
+//    @Transactional(rollbackOn = Exception.class) // dessa forma o transactional leva em consideração tambem as exceções do tipo checked
+    @Transactional
     public Author save(AuthorPostRequestBody authorPostRequestBody) {
         return authorRepository.save(AuthorMapper.INSTANCE.toAuthor(authorPostRequestBody));
     }

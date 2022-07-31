@@ -22,6 +22,10 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
+    public List<Author> findByName(String name){
+        return authorRepository.findByName(name);
+    }
+
     public Author findByIdOrThrowBadRequestException(long id) {
         return authorRepository.findById(id) //findById retorna um optional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Author not found"));

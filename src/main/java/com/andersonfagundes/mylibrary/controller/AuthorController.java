@@ -29,6 +29,11 @@ public class AuthorController {
         return new ResponseEntity<>(authorService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/findByName")
+    public ResponseEntity<List<Author>> findByName(@RequestParam String name){
+        return new ResponseEntity<>(authorService.findByName(name), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Author> save(@RequestBody AuthorPostRequestBody authorPostRequestBody){ //utilizar o jackson para fazer o mapeamento para a classe Author
         return new ResponseEntity<>(authorService.save(authorPostRequestBody), HttpStatus.CREATED);

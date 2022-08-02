@@ -7,6 +7,8 @@ import com.andersonfagundes.mylibrary.repository.AuthorRepository;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPostRequestBody;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,8 +20,8 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
-    public List<Author> listAll() {
-        return authorRepository.findAll();
+    public Page<Author> listAll(Pageable pageable) {
+        return authorRepository.findAll(pageable);
     }
 
     public List<Author> findByName(String name){

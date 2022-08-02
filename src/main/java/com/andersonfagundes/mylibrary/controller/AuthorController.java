@@ -6,6 +6,8 @@ import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
 import com.andersonfagundes.mylibrary.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping
-    public ResponseEntity<List<Author>> listAll(){
-        return new ResponseEntity<>(authorService.listAll(),HttpStatus.OK);
+    public ResponseEntity<Page<Author>> listAll(Pageable pageable){
+        return new ResponseEntity<>(authorService.listAll(pageable),HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")

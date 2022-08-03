@@ -13,6 +13,7 @@ class AuthorRepositoryTest {
     @Autowired
     private AuthorRepository authorRepository;
     @Test
+    @DisplayName("save_PersirtAuthor_WhenSuccessfull")
     void save_PersirtAuthor_WhenSuccessfull(){ //nome do metodo_o que esse metodo precisa fazer_quando isso deve acontecer
         Author authorToBeSaved = createAuthor();
         Author savedAuthor = this.authorRepository.save(authorToBeSaved);

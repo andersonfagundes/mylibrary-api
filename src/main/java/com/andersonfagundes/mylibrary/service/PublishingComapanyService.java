@@ -1,6 +1,7 @@
 package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.PublishingCompany;
+import com.andersonfagundes.mylibrary.exception.BadRequestException;
 import com.andersonfagundes.mylibrary.repository.PublishingCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,11 @@ public class PublishingComapanyService {
 
     public Page<PublishingCompany> listAll(Pageable pageable) {
         return publishingCompanyRepository.findAll(pageable);
+    }
+
+    public PublishingCompany findByIdOrThrowBadRequestException(long id) {
+        return publishingCompanyRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Publishing company not found"));
     }
 
 }

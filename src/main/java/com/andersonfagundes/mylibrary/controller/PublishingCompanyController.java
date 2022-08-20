@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,11 @@ public class PublishingCompanyController {
     @GetMapping
     public ResponseEntity<Page<PublishingCompany>> listAll(Pageable pageable){
         return new ResponseEntity<>(publishingComapanyService.listAll(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PublishingCompany> findById(@PathVariable long id){
+        return new ResponseEntity<>(publishingComapanyService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
     }
 
 }

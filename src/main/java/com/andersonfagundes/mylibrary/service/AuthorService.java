@@ -1,14 +1,21 @@
 package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.Author;
+<<<<<<< Updated upstream
 import com.andersonfagundes.mylibrary.exception.BadRequestException;
+=======
+import com.andersonfagundes.mylibrary.exception.author.BadRequestException;
+>>>>>>> Stashed changes
 import com.andersonfagundes.mylibrary.mapper.author.AuthorMapper;
 import com.andersonfagundes.mylibrary.repository.AuthorRepository;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPostRequestBody;
 import com.andersonfagundes.mylibrary.requests.author.AuthorPutRequestBody;
 import lombok.RequiredArgsConstructor;
+<<<<<<< Updated upstream
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+=======
+>>>>>>> Stashed changes
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

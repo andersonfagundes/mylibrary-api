@@ -24,7 +24,7 @@ public class AuthorService {
         return authorRepository.findAll(pageable);
     }
 
-    public List<Author> findByName(String name){
+    public List<Author> findByName(String name) {
         return authorRepository.findByName(name);
     }
 
@@ -35,9 +35,10 @@ public class AuthorService {
     }
 
 //    @Transactional(rollbackOn = Exception.class) // dessa forma o transactional leva em consideração tambem as exceções do tipo checked
-    @Transactional
+
     public Author save(AuthorPostRequestBody authorPostRequestBody) {
         return authorRepository.save(AuthorMapper.INSTANCE.toAuthor(authorPostRequestBody));
+        //return authorRepository.save(Author.builder().name(authorPostRequestBody.getName()).build());
     }
 
     public void delete(long id) {

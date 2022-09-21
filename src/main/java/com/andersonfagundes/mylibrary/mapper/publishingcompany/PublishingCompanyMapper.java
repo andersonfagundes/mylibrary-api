@@ -1,4 +1,4 @@
-package com.andersonfagundes.mylibrary.mapper.author;
+package com.andersonfagundes.mylibrary.mapper.publishingcompany;
 
 import com.andersonfagundes.mylibrary.domain.PublishingCompany;
 import com.andersonfagundes.mylibrary.requests.publishingcompany.PublishingCompanyPostRequestBody;

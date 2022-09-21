@@ -2,14 +2,13 @@ package com.andersonfagundes.mylibrary.service;
 
 import com.andersonfagundes.mylibrary.domain.PublishingCompany;
 import com.andersonfagundes.mylibrary.exception.BadRequestException;
-import com.andersonfagundes.mylibrary.mapper.author.PublishingCompanyMapper;
+import com.andersonfagundes.mylibrary.mapper.publishingcompany.PublishingCompanyMapper;
 import com.andersonfagundes.mylibrary.repository.PublishingCompanyRepository;
 import com.andersonfagundes.mylibrary.requests.publishingcompany.PublishingCompanyPostRequestBody;
 import com.andersonfagundes.mylibrary.requests.publishingcompany.PublishingCompanyPutRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

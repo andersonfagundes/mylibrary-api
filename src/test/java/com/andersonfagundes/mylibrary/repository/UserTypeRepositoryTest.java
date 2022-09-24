@@ -24,6 +24,18 @@ class UserTypeRepositoryTest {
         Assertions.assertThat(userTypeSaved.getType()).isEqualTo(userTypeToBeSaved.getType());
     }
 
+    @Test
+    @DisplayName("Saves updates user type when successfull")
+    void save_updatesUserTypes_WhenSuccesfull(){
+        UserType userTypeToBeSaved = createUserType();
+        UserType userTypeSaved = this.userTypeRepository.save(userTypeToBeSaved);
+        userTypeSaved.setType("user");
+        UserType userTypeUpdated = this.userTypeRepository.save(userTypeSaved);
+        Assertions.assertThat(userTypeSaved).isNotNull();
+        Assertions.assertThat(userTypeSaved.getId()).isNotNull();
+        Assertions.assertThat(userTypeUpdated.getType()).isEqualTo(userTypeSaved.getType());
+    }
+
     private UserType createUserType() {
         return UserType.builder()
                 .type("admin")

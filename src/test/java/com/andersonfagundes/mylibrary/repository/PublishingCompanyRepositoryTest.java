@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Optional;
+
 
 @DataJpaTest
 @DisplayName("Test for Publishing Company Repository")
@@ -35,6 +37,17 @@ class PublishingCompanyRepositoryTest {
         Assertions.assertThat(publishingCompanySaved).isNotNull();
         Assertions.assertThat(publishingCompanySaved.getId()).isNotNull();
         Assertions.assertThat(publishingCompanySaved.getName()).isEqualTo(publishingCompanyUpdated.getName());
+    }
+
+
+    @Test
+    @DisplayName("Delete Removes Publishing Company When Successfull")
+    void delete_RemovesPublishingCompany_WhenSuccessfull(){
+        PublishingCompany publishingCompanyToBeSaved = createPublishingCompany();
+        PublishingCompany publishingCompanySaved = this.publishingCompanyRepository.save(publishingCompanyToBeSaved);
+        this.publishingCompanyRepository.delete(publishingCompanySaved);
+        Optional<PublishingCompany> publishingCompanyOptional = this.publishingCompanyRepository.findById(publishingCompanySaved.getId());
+        Assertions.assertThat(publishingCompanyOptional).isEmpty();
     }
 
     private PublishingCompany createPublishingCompany() {

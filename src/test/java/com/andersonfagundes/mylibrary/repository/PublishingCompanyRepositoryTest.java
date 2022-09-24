@@ -25,6 +25,18 @@ class PublishingCompanyRepositoryTest {
         Assertions.assertThat(publishingCompanyToBeSaved.getName()).isEqualTo(publishingCompanySaved.getName());
     }
 
+    @Test
+    @DisplayName("Saves update publishing company")
+    void save_UpdatePublishingCompany_WhenSuccesfull(){
+        PublishingCompany publishingCompanyToBeSaved = createPublishingCompany();
+        PublishingCompany publishingCompanySaved = this.publishingCompanyRepository.save(publishingCompanyToBeSaved);
+        publishingCompanySaved.setName("Orvalho.com");
+        PublishingCompany publishingCompanyUpdated = this.publishingCompanyRepository.save(publishingCompanySaved);
+        Assertions.assertThat(publishingCompanySaved).isNotNull();
+        Assertions.assertThat(publishingCompanySaved.getId()).isNotNull();
+        Assertions.assertThat(publishingCompanySaved.getName()).isEqualTo(publishingCompanyUpdated.getName());
+    }
+
     private PublishingCompany createPublishingCompany() {
         return PublishingCompany.builder()
                 .name("Editora Vida")

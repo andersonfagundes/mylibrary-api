@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Optional;
 
+import static com.andersonfagundes.mylibrary.util.PublishingCompanyCreator.createPublishingCompanyToBeSaved;
+
 
 @DataJpaTest
 @DisplayName("Test for Publishing Company Repository")
@@ -20,7 +22,7 @@ class PublishingCompanyRepositoryTest {
     @Test
     @DisplayName("Save persists publishingcompany when successfull")
     void save_PersistsPublishingCompany_WhenSuccessfull(){
-        PublishingCompany publishingCompanyToBeSaved = createPublishingCompany();
+        PublishingCompany publishingCompanyToBeSaved = createPublishingCompanyToBeSaved();
         PublishingCompany publishingCompanySaved = this.publishingCompanyRepository.save(publishingCompanyToBeSaved);
         Assertions.assertThat(publishingCompanySaved).isNotNull();
         Assertions.assertThat(publishingCompanySaved.getId()).isNotNull();
@@ -30,7 +32,7 @@ class PublishingCompanyRepositoryTest {
     @Test
     @DisplayName("Saves update publishing company")
     void save_UpdatePublishingCompany_WhenSuccesfull(){
-        PublishingCompany publishingCompanyToBeSaved = createPublishingCompany();
+        PublishingCompany publishingCompanyToBeSaved = createPublishingCompanyToBeSaved();
         PublishingCompany publishingCompanySaved = this.publishingCompanyRepository.save(publishingCompanyToBeSaved);
         publishingCompanySaved.setName("Orvalho.com");
         PublishingCompany publishingCompanyUpdated = this.publishingCompanyRepository.save(publishingCompanySaved);
@@ -43,17 +45,11 @@ class PublishingCompanyRepositoryTest {
     @Test
     @DisplayName("Delete Removes Publishing Company When Successfull")
     void delete_RemovesPublishingCompany_WhenSuccessfull(){
-        PublishingCompany publishingCompanyToBeSaved = createPublishingCompany();
+        PublishingCompany publishingCompanyToBeSaved = createPublishingCompanyToBeSaved();
         PublishingCompany publishingCompanySaved = this.publishingCompanyRepository.save(publishingCompanyToBeSaved);
         this.publishingCompanyRepository.delete(publishingCompanySaved);
         Optional<PublishingCompany> publishingCompanyOptional = this.publishingCompanyRepository.findById(publishingCompanySaved.getId());
         Assertions.assertThat(publishingCompanyOptional).isEmpty();
-    }
-
-    private PublishingCompany createPublishingCompany() {
-        return PublishingCompany.builder()
-                .name("Editora Vida")
-                .build();
     }
 
 }

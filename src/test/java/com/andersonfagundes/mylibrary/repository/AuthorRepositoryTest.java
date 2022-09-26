@@ -1,7 +1,6 @@
 package com.andersonfagundes.mylibrary.repository;
 
 import com.andersonfagundes.mylibrary.domain.Author;
-import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,8 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.andersonfagundes.mylibrary.util.AuthorCreator.createAuthorToBeSaved;
+
 @DataJpaTest
 @DisplayName("Tests for Author Repository")
 class AuthorRepositoryTest {
@@ -20,7 +21,7 @@ class AuthorRepositoryTest {
     @Test
     @DisplayName("Save persists author when successfull")
     void save_PersirtAuthor_WhenSuccessfull(){ //nome do metodo_o que esse metodo precisa fazer_quando isso deve acontecer
-        Author authorToBeSaved = createAuthor();
+        Author authorToBeSaved = createAuthorToBeSaved();
         Author authorSaved = this.authorRepository.save(authorToBeSaved);
         Assertions.assertThat(authorSaved).isNotNull(); //verifica se tem um objeto
         Assertions.assertThat(authorSaved.getId()).isNotNull(); //verifica se foi criado um id
@@ -30,7 +31,7 @@ class AuthorRepositoryTest {
     @Test
     @DisplayName("Save Updates author when successfull")
     void save_UpdatesAuthor_WhenSuccessfull(){ //nome do metodo_o que esse metodo precisa fazer_quando isso deve acontecer
-        Author authorToBeSaved = createAuthor();
+        Author authorToBeSaved = createAuthorToBeSaved();
         Author authorSaved = this.authorRepository.save(authorToBeSaved);
         authorSaved.setName("Lobato Monteiro");
         Author authorUpdated = this.authorRepository.save(authorSaved);
@@ -42,7 +43,7 @@ class AuthorRepositoryTest {
     @Test
     @DisplayName("Delete remove author when successfull")
     void delete_RemovesAuthor_WhenSuccessfull(){ //nome do metodo_o que esse metodo precisa fazer_quando isso deve acontecer
-        Author authorToBeSaved = createAuthor();
+        Author authorToBeSaved = createAuthorToBeSaved();
         Author authorSaved = this.authorRepository.save(authorToBeSaved);
         this.authorRepository.delete(authorSaved);
         Optional<Author> authorOptional = this.authorRepository.findById(authorSaved.getId());
@@ -52,7 +53,7 @@ class AuthorRepositoryTest {
     @Test
     @DisplayName("Find by name returns list of author when successful")
     void findByNae_ReturnsListofAuthor_WhenSuccessfull(){ //nome do metodo_o que esse metodo precisa fazer_quando isso deve acontecer
-        Author authorToBeSaved = createAuthor();
+        Author authorToBeSaved = createAuthorToBeSaved();
         Author authorSaved = this.authorRepository.save(authorToBeSaved);
         String name = authorSaved.getName();
         List<Author> authors = this.authorRepository.findByName(name);
@@ -87,9 +88,4 @@ class AuthorRepositoryTest {
 
     }
 
-    private Author createAuthor(){
-        return Author.builder()
-                .name("Monteiro Lobato")
-                .build();
-    }
 }

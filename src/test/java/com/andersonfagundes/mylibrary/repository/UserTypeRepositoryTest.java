@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Optional;
 
+import static com.andersonfagundes.mylibrary.util.UserTypeCreator.createUserTypeToBeSaved;
+
 @DataJpaTest
 @DisplayName("Test for User Type Respository")
 class UserTypeRepositoryTest {
@@ -20,7 +22,7 @@ class UserTypeRepositoryTest {
     @Test
     @DisplayName("Save persists user type when successfull")
     void save_PersistsUserType_WhenSuccessfull(){
-        UserType userTypeToBeSaved = createUserType();
+        UserType userTypeToBeSaved = createUserTypeToBeSaved();
         UserType userTypeSaved = this.userTypeRepository.save(userTypeToBeSaved);
         Assertions.assertThat(userTypeSaved).isNotNull();
         Assertions.assertThat(userTypeSaved.getId()).isNotNull();
@@ -30,7 +32,7 @@ class UserTypeRepositoryTest {
     @Test
     @DisplayName("Saves updates user type when successfull")
     void save_updatesUserTypes_WhenSuccesfull(){
-        UserType userTypeToBeSaved = createUserType();
+        UserType userTypeToBeSaved = createUserTypeToBeSaved();
         UserType userTypeSaved = this.userTypeRepository.save(userTypeToBeSaved);
         userTypeSaved.setType("user");
         UserType userTypeUpdated = this.userTypeRepository.save(userTypeSaved);
@@ -42,16 +44,11 @@ class UserTypeRepositoryTest {
     @Test
     @DisplayName("Delete remove user types when successful")
     void delete_RemovesUserType_WhenSuccessfull(){
-        UserType userTypeToBeSaved = createUserType();
+        UserType userTypeToBeSaved = createUserTypeToBeSaved();
         UserType userTypeSaved = this.userTypeRepository.save(userTypeToBeSaved);
         this.userTypeRepository.delete(userTypeSaved);
         Optional<UserType> userTypeOptional = this.userTypeRepository.findById(userTypeSaved.getId());
         Assertions.assertThat(userTypeOptional).isEmpty();
     }
 
-    private UserType createUserType() {
-        return UserType.builder()
-                .type("admin")
-                .build();
-    }
 }

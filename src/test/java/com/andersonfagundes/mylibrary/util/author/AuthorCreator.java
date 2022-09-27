@@ -1,4 +1,4 @@
-package com.andersonfagundes.mylibrary.util;
+package com.andersonfagundes.mylibrary.util.author;
 
 import com.andersonfagundes.mylibrary.domain.Author;
 

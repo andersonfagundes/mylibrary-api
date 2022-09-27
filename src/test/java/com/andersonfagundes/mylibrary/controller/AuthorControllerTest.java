@@ -33,10 +33,13 @@ class AuthorControllerTest {
         PageImpl<Author> authorPage = new PageImpl<>(List.of(AuthorCreator.createValidAuthor()));
         BDDMockito.when(authorServiceMock.listAll(ArgumentMatchers.any()))
                 .thenReturn(authorPage);
+
+        BDDMockito.when(authorServiceMock.findByIdOrThrowBadRequestException(ArgumentMatchers.anyLong()))
+                .thenReturn(AuthorCreator.createValidAuthor());
     }
 
     @Test
-    @DisplayName("List returns list of author inside page object when successful")
+    @DisplayName("listAll list of author inside page object when successful")
     void list_ReturnsListOfAuthorsInsidePageObject_WhenSuccessfull(){
         String expectedName = AuthorCreator.createValidAuthor().getName();
         Page<Author> authorPage = authorController.listAll(null).getBody();
@@ -46,5 +49,17 @@ class AuthorControllerTest {
                 .hasSize(1);
         Assertions.assertThat(authorPage.toList().get(0).getName()).isEqualTo(expectedName);
     }
+
+    @Test
+    @DisplayName("findById returns author when successful")
+    void findById_ReturnsAuthor_WhenSuccessfull(){
+        Long expectedId = AuthorCreator.createValidAuthor().getId();
+        Author author = authorController.findById(1).getBody();
+        Assertions.assertThat(author)
+                .isNotNull();
+        Assertions.assertThat(author.getId()).isNotNull().isEqualTo(expectedId);
+    }
+
+
 
 }

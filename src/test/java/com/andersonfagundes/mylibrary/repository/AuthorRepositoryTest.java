@@ -11,7 +11,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
-import static com.andersonfagundes.mylibrary.util.AuthorCreator.createAuthorToBeSaved;
+import static com.andersonfagundes.mylibrary.util.author.AuthorCreator.createAuthorToBeSaved;
 
 @DataJpaTest
 @DisplayName("Tests for Author Repository")
